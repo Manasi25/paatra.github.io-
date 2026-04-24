@@ -5,169 +5,154 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paatra | Photography Portfolio</title>
     <style>
-        /* CSS Reset & Core Styling */
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-        }
-        
-        html {
-            scroll-behavior: smooth;
-        }
-
+        /* Base & Glassmorphism Navigation */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body { 
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+            font-family: 'Helvetica Neue', Helvetica, sans-serif; 
             background-color: #0a0a0a; 
             color: #ffffff; 
-            line-height: 1.6; 
+            line-height: 1.8; 
         }
 
-        /* Hero Section - The First Impression */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo { font-size: 1.4rem; letter-spacing: 5px; text-transform: uppercase; font-weight: 300; }
+        .nav-links { display: flex; list-style: none; gap: 20px; }
+        .nav-links a { 
+            color: #aaa; text-decoration: none; font-size: 0.75rem; 
+            text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; 
+        }
+        .nav-links a:hover { color: #fff; }
+
+        /* Sections Styling */
+        section { padding: 100px 10%; }
+        .section-title { 
+            text-align: center; font-size: 2.2rem; font-weight: 300; 
+            letter-spacing: 6px; margin-bottom: 50px; text-transform: uppercase; 
+        }
+
+        /* Hero */
         .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            /* Update this URL with your own best photograph! */
-            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(10, 10, 10, 0.9)), 
-                        url('images/paatra_profile.png') center/cover no-repeat fixed;
+            height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(10,10,10,1)), 
+                        url('images/paatra_profile.png') center/cover no-repeat;
         }
+        .hero h1 { font-size: clamp(3rem, 10vw, 5rem); letter-spacing: 12px; font-weight: 200; margin-bottom: 10px; }
+        .hero p { font-style: italic; color: #888; letter-spacing: 2px; margin-bottom: 30px; }
 
-        .hero h1 { 
-            font-size: clamp(3rem, 8vw, 6rem); 
-            letter-spacing: 8px; 
-            margin-bottom: 15px; 
-            font-weight: 300; 
-            text-transform: uppercase;
+        /* About Me - Poetic Styling */
+        .about-content { 
+            max-width: 800px; margin: 0 auto; text-align: center; 
+            font-size: 1.1rem; color: #ccc; font-weight: 300;
         }
+        .about-content span { display: block; margin-top: 20px; font-style: italic; color: #fff; }
 
-        .hero p { 
-            font-size: 1.2rem; 
-            margin-bottom: 40px; 
-            color: #d1d1d1; 
-            font-weight: 300;
-            letter-spacing: 1px;
+        /* Services & Pricing */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .card { 
+            background: #111; padding: 40px; border: 1px solid #222; 
+            text-align: center; transition: 0.4s; 
         }
+        .card:hover { border-color: #555; background: #161616; }
+        .card h3 { margin-bottom: 15px; letter-spacing: 2px; font-weight: 400; font-size: 1rem; }
+        .price { display: block; font-size: 1.4rem; margin-bottom: 20px; color: #fff; }
 
+        /* Buttons */
         .btn {
-            padding: 14px 35px; 
-            border: 1px solid #ffffff; 
-            color: #ffffff; 
-            text-decoration: none;
-            text-transform: uppercase; 
-            letter-spacing: 2px; 
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
+            display: inline-block; padding: 12px 28px; border: 1px solid #fff;
+            color: #fff; text-decoration: none; font-size: 0.8rem;
+            letter-spacing: 2px; text-transform: uppercase; transition: 0.3s;
         }
+        .btn:hover { background: #fff; color: #000; }
+        .btn-gold { border-color: #d4af37; color: #d4af37; }
+        .btn-gold:hover { background: #d4af37; color: #fff; }
 
-        .btn:hover { 
-            background: #ffffff; 
-            color: #0a0a0a; 
-        }
+        /* Gallery */
+        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; }
+        .gallery img { width: 100%; height: 400px; object-fit: cover; opacity: 0.8; transition: 0.5s; }
+        .gallery img:hover { opacity: 1; transform: scale(1.02); }
 
-        /* Gallery Section */
-        .gallery-container { 
-            padding: 6rem 2rem; 
-            max-width: 1400px; 
-            margin: 0 auto; 
-        }
+        footer { text-align: center; padding: 60px; border-top: 1px solid #222; color: #555; font-size: 0.8rem; }
+        footer a { color: #888; text-decoration: none; margin: 0 10px; }
 
-        .gallery-container h2 { 
-            text-align: center;
-            font-size: 2rem; 
-            margin-bottom: 4rem; 
-            font-weight: 300; 
-            letter-spacing: 4px; 
-            text-transform: uppercase;
+        @media (max-width: 768px) {
+            .nav-links { display: none; } /* Simplified for mobile */
         }
-
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 20px;
-        }
-
-        .gallery-item {
-            overflow: hidden;
-            position: relative;
-            cursor: pointer;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        /* Hover Effect for Images */
-        .gallery-item:hover img { 
-            transform: scale(1.08); 
-        }
-        
-        .gallery-item::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.2);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .gallery-item:hover::after {
-            opacity: 1;
-        }
-
-        /* Minimal Footer */
-        footer { 
-            text-align: center; 
-            padding: 3rem; 
-            border-top: 1px solid #1f1f1f; 
-            font-size: 0.9rem; 
-            color: #666; 
-            letter-spacing: 1px;
-        }
-        
-        footer a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 10px;
-            transition: color 0.3s;
-        }
-        
-        footer a:hover {
-            color: #999;
-        }
-
     </style>
 </head>
 <body>
 
+    <nav>
+        <div class="logo">Paatra</div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#portfolio">Gallery</a></li>
+            <li><a href="https://instagram.com/veg.traveler" target="_blank">Instagram</a></li>
+        </ul>
+        <a href="#book" class="btn" style="padding: 8px 15px; font-size: 0.7rem;">Book Now</a>
+    </nav>
+
     <header class="hero">
         <h1>Paatra</h1>
-        <p>Capturing the unseen details of the world.</p>
-        <a href="#portfolio" class="btn">View My Work</a>
+        <p>Where nature, travel, and humanity meet.</p>
     </header>
 
-    <section id="portfolio" class="gallery-container">
-        <h2>Selected Works</h2>
-        <div class="gallery">
-           <div class="gallery-item"><img src="images/gallery_photo1.png" alt="Yellowstone_Nature"></div>
-           <div class="gallery-item"><img src="images/gallery_photo2.png" alt="Yellowstone_Nature"></div>
-           <div class="gallery-item"><img src="images/gallery_photo3.png" alt="Idaho_Nature"></div>
+    <section id="about">
+        <h2 class="section-title">The Lens & The Soul</h2>
+        <div class="about-content">
+            <p>I believe that every shadow tells a story and every light holds a memory. My heart beats for the wild whispers of nature and the rhythmic pulse of travel. By combining these three loves—photography, exploration, and the earth—I seek to share a piece of the world's quiet magic with you.</p>
+            <span>"I don't just take photos; I collect moments of existence."</span>
         </div>
     </section>
 
+    <section id="services" style="background: #0d0d0d;">
+        <h2 class="section-title">Experiences & Pricing</h2>
+        <div class="services-grid">
+            <div class="card">
+                <h3>Maternal Session</h3>
+                <span class="price">Starts at $150/hr</span>
+                <p style="color: #666; margin-bottom: 20px;">Celebrating the strength and beauty of new life.</p>
+                <a href="#book" class="btn">Inquire</a>
+            </div>
+            <div class="card">
+                <h3>Family & Couples</h3>
+                <span class="price">Fall Special</span>
+                <p style="color: #666; margin-bottom: 20px;">Capturing the warmth of connection in the autumn air.</p>
+                <a href="#book" class="btn">Inquire</a>
+            </div>
+            <div class="card">
+                <h3>Birthdays & Events</h3>
+                <span class="price">Event Rates</span>
+                <p style="color: #666; margin-bottom: 20px;">Preserving the joy and laughter of your celebrations.</p>
+                <a href="#book" class="btn">Inquire</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <h2 class="section-title">Wanderlust & Wild</h2>
+        <div class="gallery">
+            <img src="images/gallery_photo1.png" alt="Nature">
+            <img src="images/gallery_photo2.png" alt="Travel">
+            <img src="images/gallery_photo3.png" alt="Nature">
+        </div>
+    </section>
+
+    <section id="book" style="text-align: center; background: #111;">
+        <h2 class="section-title">Let's Create Together</h2>
+        <p style="margin-bottom: 30px; color: #888;">Ready to freeze time? Select a date that works for you.</p>
+        <a href="mailto:teampaatra@gmail.com" class="btn btn-gold">Open Booking Calendar</a>
+    </section>
+
     <footer>
-        <p>
-            <a href="https://instagram.com/veg.traveler">Instagram</a> | 
-            <a href="mailto:teampaatra@gmail.com">Contact</a>
-        </p>
-        <p style="margin-top: 15px;">&copy; 2026 Paatra Photography.</p>
+        <p>&copy; 2026 Paatra Photography | <a href="https://instagram.com/veg.traveler">Instagram</a> | <a href="mailto:teampaatra@gmail.com">Contact</a></p>
     </footer>
 
 </body>
